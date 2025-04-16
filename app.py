@@ -244,10 +244,15 @@ def generate_parts_report(all_switchboards):
             parts = section['parts']
             section_type = section['type']
             
+            # Format dimensions to show decimals only when not zero
+            width_str = f"{section['width']:.2f}".rstrip('0').rstrip('.')
+            height_str = f"{section['height']:.2f}".rstrip('0').rstrip('.')
+            depth_str = f"{section['depth']:.2f}".rstrip('0').rstrip('.')
+            
             # Track pieces for each dimension
-            width_key = f"{int(section['width'])}\""
-            height_key = f"{int(section['height'])}\""
-            depth_key = f"{int(section['depth'])}\""
+            width_key = f"{width_str}\""
+            height_key = f"{height_str}\""
+            depth_key = f"{depth_str}\""
             
             if width_key not in width_pieces[section_type]:
                 width_pieces[section_type][width_key] = 0
@@ -263,9 +268,9 @@ def generate_parts_report(all_switchboards):
             section_data.append([
                 f"Section {i}",
                 section['type'],
-                f"{int(section['width'])}\" ({parts['width_pieces']})",
-                f"{int(section['height'])}\" ({parts['height_pieces']})",
-                f"{int(section['depth'])}\" ({parts['depth_pieces']})",
+                f"{width_str}\" ({parts['width_pieces']})",
+                f"{height_str}\" ({parts['height_pieces']})",
+                f"{depth_str}\" ({parts['depth_pieces']})",
                 "Yes" if section['type'] == 'L' else "No"
             ])
         
