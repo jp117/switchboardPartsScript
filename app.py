@@ -6,6 +6,8 @@ from reportlab.lib.units import inch
 from reportlab.pdfgen import canvas
 from datetime import datetime
 import os
+import os.path
+from pathlib import Path
 
 def get_basic_info():
     """Get the basic information about the switchboard."""
@@ -169,29 +171,31 @@ def process_switchboard():
 
 def get_report_name():
     """Get the report name from user and handle file existence."""
+    # Use the current directory
+    current_dir = "/app"
+    
     while True:
         report_name = input("\nEnter a name for the report (without .pdf): ").strip()
         if not report_name:
             print("Report name cannot be empty. Please try again.")
             continue
             
-        filename = f"{report_name} - Parts Report.pdf"
+        filename = os.path.join(current_dir, f"{report_name} - Parts Report.pdf")
         if os.path.exists(filename):
             while True:
                 response = input(f"File '{filename}' already exists. Overwrite? (yes/no): ").lower().strip()
                 if response in ['yes', 'y']:
-                    return report_name
+                    return report_name, filename
                 elif response in ['no', 'n']:
                     break
                 print("Please enter 'yes' or 'no'")
         else:
-            return report_name
+            return report_name, filename
 
 def generate_parts_report(all_switchboards):
     """Generate a PDF report of all parts needed."""
-    # Get report name from user
-    report_name = get_report_name()
-    filename = f"{report_name} - Parts Report.pdf"
+    # Get report name and filename from user
+    report_name, filename = get_report_name()
     
     # Create the PDF document
     doc = SimpleDocTemplate(

@@ -7,5 +7,8 @@ WORKDIR /app
 # Install required packages
 RUN pip install reportlab
 
-# Keep container running and provide interactive shell
-CMD ["/bin/bash"] 
+# Copy the application files
+COPY . /app
+
+# Run the application
+CMD ["python", "app.py"] 

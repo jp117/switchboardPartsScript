@@ -25,9 +25,19 @@ docker build -t switchboardpartsscript .
 ```
 
 2. Run the script:
+
+For Windows:
 ```bash
-docker run -it -v ${PWD}:/app switchboardpartsscript python app.py
+docker run -it -v "//c/Users/YOUR_USERNAME/programming/switchboardPartsScript:/app" switchboardpartsscript
 ```
+Note: Replace `YOUR_USERNAME` with your Windows username and adjust the path to match your project location.
+
+For Linux/Mac:
+```bash
+docker run -it -v ${PWD}:/app switchboardpartsscript
+```
+
+The PDF will be saved in your project directory.
 
 ### Manual Installation
 
