@@ -170,9 +170,12 @@ def process_switchboard():
     }
 
 def get_report_name():
-    """Get the report name from user and handle file existence."""
-    # Use the current directory
-    current_dir = "/app"
+    """Get report name from user and check for file conflicts."""
+    # Change this to save in the output directory instead of /app
+    current_dir = "./output"
+    
+    # Create output directory if it doesn't exist
+    os.makedirs(current_dir, exist_ok=True)
     
     while True:
         report_name = input("\nEnter a name for the report (without .pdf): ").strip()

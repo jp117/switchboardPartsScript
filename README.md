@@ -26,18 +26,33 @@ docker build -t switchboardpartsscript .
 
 2. Run the script:
 
+**Easy Option for Windows Users:**
+Simply double-click one of these batch files:
+- `run-downloads.bat` - Saves PDFs to your Downloads folder
+- `run-local.bat` - Saves PDFs to the project output directory
+
+**Manual Docker Commands:**
+
+**Option 1: Save to your Downloads folder (Recommended for Windows):**
+```bash
+docker run -it -v "//c/Users/YOUR_USERNAME/Downloads:/app/output" switchboardpartsscript
+```
+Note: Replace `YOUR_USERNAME` with your actual Windows username (e.g., johnparadise)
+
+**Option 2: Save to project directory:**
+
 For Windows:
 ```bash
-docker run -it -v "//c/Users/YOUR_USERNAME/programming/switchboardPartsScript:/app" switchboardpartsscript
+docker run -it -v "//c/Users/YOUR_USERNAME/programming/switchboardPartsScript/output:/app/output" switchboardpartsscript
 ```
 Note: Replace `YOUR_USERNAME` with your Windows username and adjust the path to match your project location.
 
 For Linux/Mac:
 ```bash
-docker run -it -v ${PWD}:/app switchboardpartsscript
+docker run -it -v ${PWD}/output:/app/output switchboardpartsscript
 ```
 
-The PDF will be saved in your project directory.
+The PDF will be saved in your specified directory (Downloads folder or project output directory).
 
 ### Manual Installation
 
@@ -66,4 +81,4 @@ The generated PDF report includes:
 - Switchboard details
 - Section-by-section breakdown
 - Dimension totals for width, height, and depth pieces
-- Separate tracking for standard and corner pieces 
+- Separate tracking for standard and corner pieces
